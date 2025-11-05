@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Access Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+body { font-family: "Avenir Next", sans-serif; background:#f7f9fa; display:flex;
+align-items:center; justify-content:center; height:100vh; margin:0; }
+#box { background:white; border-radius:10px; padding:2rem 3rem; box-shadow:0 6px 20px rgba(0,0,0,0.15); text-align:center; }
+h2 { color:#0b4f6c; margin-bottom:1rem; }
+input { padding:0.5rem; font-size:1rem; width:200px; }
+button { padding:0.5rem 1rem; margin-left:0.5rem; font-size:1rem; }
+#msg { color:#c62828; margin-top:0.75rem; height:1.2em; }
+</style>
+</head>
+<body>
+  <div id="box">
+    <h2>Restricted Access</h2>
+    <p>Please enter the access code to continue:</p>
+    <input id="code" type="password" placeholder="Access code" />
+    <button id="btn">Submit</button>
+    <div id="msg"></div>
+  </div>
+
+<script>
+const SECRET = "Otago2025";  // <-- change your code here
+const HUB_URL = "https://taiari-taieri-cap-orcnz.hub.arcgis.com/"; // <-- your Hub URL
+
+document.getElementById('btn').addEventListener('click', checkCode);
+document.getElementById('code').addEventListener('keypress', e => {
+  if(e.key === 'Enter') checkCode();
+});
+
+function checkCode(){
+  const val = document.getElementById('code').value.trim();
+  if(val === SECRET){
+    window.location.href = HUB_URL; // redirect to your hub
+  } else {
+    document.getElementById('msg').innerText = "Incorrect code. Please try again.";
+  }
+}
+</script>
+</body>
+</html>
